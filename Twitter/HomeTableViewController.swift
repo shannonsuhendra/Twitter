@@ -34,7 +34,6 @@ class HomeTableViewController: UITableViewController {
                 self.tweetArray.append(tweet)
             }
             
-            print(self.tweetArray)
             self.tableView.reloadData()
             self.myRefreshControl.endRefreshing()
             
@@ -85,10 +84,11 @@ class HomeTableViewController: UITableViewController {
         
         cell.userNameLabel.text = user["name"] as? String
         cell.tweetContent.text = tweetArray[indexPath.row]["text"] as? String
-        
-        let imageUrl = URL(string: (user["pofile_image_url_https"] as? String)!)
+                
+        let profileImageUrl = (user["profile_image_url"] as? String)!
+        let imageUrl = URL(string: profileImageUrl)
         let data = try? Data(contentsOf: imageUrl!)
-        
+
         if let imageData = data {
             cell.profileImageView.image = UIImage(data: imageData)
         }
